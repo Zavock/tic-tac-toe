@@ -1,5 +1,5 @@
 const Square = ({ children, isSelected, updateBoard, index }) => {
-  const style = `border-2 border-white grid place-content-center rounded-lg text-6xl w-28 h-28 cursor-pointer ${isSelected ? 'bg-white text-black' : ''}`
+  const style = `border-2 border-white grid place-items-center rounded-lg text-6xl w-28 h-28 cursor-pointer ${isSelected ? 'bg-white text-black' : ''}`
   const handleClick = () => {
     updateBoard(index)
   }
