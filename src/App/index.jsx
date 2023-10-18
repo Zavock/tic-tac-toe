@@ -6,7 +6,10 @@ function App() {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState(TURNS.X);
 
-  const updateBoard = () => {
+  const updateBoard = (index) => {
+    const newBoard = [...board]
+    newBoard[index] = turn
+    setBoard(newBoard)
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
   }
@@ -26,7 +29,7 @@ function App() {
       </section>
       <section className="flex flex-col items-center gap-4 text-white mt-10">
         <h1 className="font-semibold text-4xl">Turn</h1>
-        <div className= "text-7xl flex gap-4">
+        <div className= "text-6xl flex gap-4">
           <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
           <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
         </div>
