@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TURNS, WINNER_COMBOS } from "../constants";
 import confetti from "canvas-confetti"
 import Square from "../Square"
+import WinnerModal from "../WinnerModal";
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null))
@@ -66,28 +67,7 @@ function App() {
           <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
         </div>
       </section>
-
-      {
-        winner != null && (
-          <section className="absolute w-[100vw] h-[100vh] top-0 left-0 grid place-items-center bg-black/75">
-            <div className="bg-black h-[380px] w-[320px] border-2 border-white rounded-lg flex flex-col justify-center items-center gap-2">
-              <h2 className="text-white text-2xl mt-10">
-                {
-                  winner === false
-                  ? 'Draw'
-                  : 'Winner'
-                }
-              </h2>
-              <header className="m-auto w-fit text-white b">
-                {winner && <Square>{winner}</Square>}
-              </header>
-              <footer>
-                <button onClick={resetGame} className="px-1 py-2 m-[25px] bg-transparent border-2 border-white text-white w-[100px] rounded-md transition duration-200 font-bold cursor-pointer hover:bg-white hover:text-black">New Game</button>
-              </footer>
-            </div>
-          </section>
-        )
-      }
+      <WinnerModal winner={winner} resetGame={resetGame} />
     </div>
   )
 }
