@@ -6,6 +6,7 @@ function App() {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState(TURNS.X);
   const [winner, setWinner] = useState(null);
+
   const checkWinner = (boardToCheck) => {
     for (const combo of WINNER_COMBOS) {
       const [a, b, c] = combo
@@ -14,6 +15,12 @@ function App() {
       }
     }
     return null
+  }
+
+  const resetGame = () => {
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
   }
 
   const updateBoard = (index) => {
@@ -30,6 +37,7 @@ function App() {
   return (
     <div className="flex flex-col items-center gap-5 mt-32">
       <h1 className="text-white text-5xl font-semibold">Tic Tac Toe</h1>
+      <button onClick={resetGame} className="px-1 py-2 m-[10px] bg-transparent border-2 border-white text-white w-[150px] rounded-md transition duration-200 font-bold cursor-pointer hover:bg-white hover:text-black">Reset Game</button>
       <section className="grid grid-cols-3 grid-rows-3 gap-x-3 gap-y-2 text-white">
         {
           board.map((_, index) => {
@@ -64,7 +72,7 @@ function App() {
                 {winner && <Square>{winner}</Square>}
               </header>
               <footer>
-                <button className="px-1 py-2 m-[25px] bg-transparent border-2 border-white text-white w-[100px] rounded-md transition duration-200 font-bold cursor-pointer hover:bg-white hover:text-black">New Game</button>
+                <button onClick={resetGame} className="px-1 py-2 m-[25px] bg-transparent border-2 border-white text-white w-[100px] rounded-md transition duration-200 font-bold cursor-pointer hover:bg-white hover:text-black">New Game</button>
               </footer>
             </div>
           </section>
