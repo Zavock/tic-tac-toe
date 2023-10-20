@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { TURNS, WINNER_COMBOS } from "../constants";
+import confetti from "canvas-confetti"
 import Square from "../Square"
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState(TURNS.X);
   const [winner, setWinner] = useState(null);
+
+  const checkToEndGame = (newBoard) => {
+    return newBoard.every(square => square != null)
+  }
 
   const checkWinner = (boardToCheck) => {
     for (const combo of WINNER_COMBOS) {
@@ -31,7 +36,12 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
     const newWinner = checkWinner(newBoard)
-    if (newWinner) setWinner(newWinner)
+    if (newWinner) {
+      confetti()
+      setWinner(newWinner)
+    } else if (checkToEndGame(newBoard)) {
+      setWinner(false)
+    }
   }
 
   return (
@@ -40,10 +50,10 @@ function App() {
       <button onClick={resetGame} className="px-1 py-2 m-[10px] bg-transparent border-2 border-white text-white w-[150px] rounded-md transition duration-200 font-bold cursor-pointer hover:bg-white hover:text-black">Reset Game</button>
       <section className="grid grid-cols-3 grid-rows-3 gap-x-3 gap-y-2 text-white">
         {
-          board.map((_, index) => {
+          board.map((square, index) => {
             return (
               <Square key={index} index={index} updateBoard={updateBoard}>
-                {board[index]}
+                {square}
               </Square>
             )
           })
