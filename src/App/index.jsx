@@ -57,7 +57,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-5 mt-32">
+    <div className="flex flex-col items-center gap-5 lg:mt-32 mt-20">
       <h1 className="text-white text-5xl font-semibold">Tic Tac Toe</h1>
       <button onClick={resetGame} className="px-1 py-2 m-[10px] bg-transparent border-2 border-white text-white w-[150px] rounded-md transition duration-200 font-bold cursor-pointer hover:bg-white hover:text-black">Reset Game</button>
       <section className="grid grid-cols-3 grid-rows-3 gap-x-3 gap-y-2 text-white">
@@ -71,7 +71,7 @@ function App() {
           })
         }
       </section>
-      <section className="flex flex-col items-center gap-4 text-white mt-10">
+      <section className="flex flex-col items-center gap-4 text-white lg:mt-10 ">
         <h1 className="font-semibold text-4xl">Turn</h1>
         <div className="text-6xl flex gap-4">
           <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
